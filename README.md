@@ -1,6 +1,6 @@
 
-<H3>ENTER YOUR NAME</H3>
-<H3>ENTER YOUR REGISTER NO.</H3>
+<H3>ENTER YOUR NAME:DEEPIKA R</H3>
+<H3>ENTER YOUR REGISTER NO:212223230038</H3>
 <H3>EX. NO.4</H3>
 <H3>DATE:</H3>
 <H1 ALIGN =CENTER>Implementation of MLP with Backpropagation for Multiclassification</H1>
@@ -117,10 +117,59 @@ Normalize our dataset.
 <H3>Program:</H3> 
 
 Insert your code here
+```
+import pandas as pd
+from sklearn import preprocessing
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import classification_report, confusion_matrix
+
+# Load dataset
+file_path = "health_lifestyle_dataset.csv"
+data = pd.read_csv(file_path)
+
+# Drop ID (not useful for prediction)
+data = data.drop("id", axis=1)
+
+# Encode categorical column 'gender'
+data["gender"] = preprocessing.LabelEncoder().fit_transform(data["gender"])
+
+# Features and target
+X = data.drop("disease_risk", axis=1)
+y = data["disease_risk"]
+
+# Encode target if categorical
+le = preprocessing.LabelEncoder()
+y_encoded = le.fit_transform(y)
+
+# Train-test split
+x_train, x_test, y_train, y_test = train_test_split(X, y_encoded, test_size=0.25, random_state=42)
+
+# Scale features
+scaler = StandardScaler()
+x_train = scaler.fit_transform(x_train)
+x_test = scaler.transform(x_test)
+
+# Neural network
+mlp = MLPClassifier(hidden_layer_sizes=(10,10,10), max_iter=1000, random_state=42)
+mlp.fit(x_train, y_train)
+
+# Predictions
+predictions = mlp.predict(x_test)
+
+# Confusion matrix
+print(confusion_matrix(y_test, predictions))
+
+# Classification report
+print(classification_report(y_test, predictions, target_names=[str(c) for c in le.classes_]))
+
+```
 
 <H3>Output:</H3>
+<img width="532" height="199" alt="image" src="https://github.com/user-attachments/assets/2a4ae049-51fd-4b03-8582-9fbc29c326cf" />
 
-Show your results here
+
 
 <H3>Result:</H3>
 Thus, MLP is implemented for multi-classification using python.
