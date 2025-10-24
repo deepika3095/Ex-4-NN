@@ -126,7 +126,7 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import classification_report, confusion_matrix
 
 # Load dataset
-file_path = "health_lifestyle_dataset.csv"
+file_path = "spotify_churn.csv"
 data = pd.read_csv(file_path)
 
 # Drop ID (not useful for prediction)
@@ -167,8 +167,10 @@ print(classification_report(y_test, predictions, target_names=[str(c) for c in l
 ```
 
 <H3>Output:</H3>
-<img width="532" height="199" alt="image" src="https://github.com/user-attachments/assets/2a4ae049-51fd-4b03-8582-9fbc29c326cf" />
 
+<img width="596" height="71" alt="image" src="https://github.com/user-attachments/assets/2fa0c61c-459c-45f8-9d54-22307be23561" />
+
+<img width="554" height="286" alt="image" src="https://github.com/user-attachments/assets/6e8cfacd-8f45-4285-bb9a-9ae11c805a53" />
 
 
 <H3>Result:</H3>
